@@ -1,0 +1,54 @@
+<!-- templates/detalle_puesto.html -->
+{% extends "base.html" %}
+
+{% block title %}{{ puesto.nombre }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <p class="text-small">Publicado por: {{ puesto.usuario.nombre }}</p>
+        <h2>{{ puesto.nombre }}</h2>
+        <p class="text-muted">{{ puesto.ubicacion }}</p>
+        <img src="{{ puesto.foto_url }}" class="img-fluid mb-3" alt="{{ puesto.nombre }}">
+        <p>{{ puesto.reseña }}</p>
+        
+        <h4>Calificaciones</h4>
+        {% for calificacion in puesto.calificaciones %}
+            <div class="card mb-2">
+                <div class="card-body">
+                    <h5 class="card-title">Puntuación: {{ calificacion.puntuacion }}/5</h5>
+                    <p class="card-text">Por: {{ calificacion.usuario.nombre }}</p>
+                </div>
+            </div>
+        {% endfor %}
+        
+        <h4 class="mt-4">Calificar este puesto</h4>
+        <form method="POST" action="{{ url_for('main.calificar_puesto', puesto_id=puesto.id) }}">
+            {{ calificacion_form.hidden_tag() }}
+            <div class="mb-3">
+                {{ calificacion_form.puntuacion(class="form-control") }}
+            </div>
+            {{ calificacion_form.submit(class="btn btn-warning") }}
+        </form>
+
+        <h4 class="mt-4">Comentarios</h4>
+        {% for comentario in puesto.comentarios %}
+            <div class="card mb-2">
+                <div class="card-body">
+                    <p class="card-text">{{ comentario.texto }}</p>
+                    <p class="text-muted">Por: {{ comentario.autor.nombre }}</p>
+                </div>
+            </div>
+        {% endfor %}
+
+        <h4 class="mt-4">Dejar un comentario</h4>
+        <form method="POST" action="{{ url_for('main.agregar_comentario', puesto_id=puesto.id) }}">
+            {{ comentario_form.hidden_tag() }}
+            <div class="mb-3">
+                {{ comentario_form.texto(class="form-control", rows=3) }}
+            </div>
+            {{ comentario_form.submit(class="btn btn-info") }}
+        </form>
+    </div>
+</div>
+{% endblock %}

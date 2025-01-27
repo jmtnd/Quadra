@@ -1,0 +1,19 @@
+<!-- templates/usuarios.html -->
+{% extends "base.html" %}
+
+{% block title %}Usuarios{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <h1>Lista de Usuarios</h1>
+        <ul class="list-group">
+            {% for usuario in usuarios %}
+                <li class="list-group-item">
+                    {{ usuario.nombre }} - {{ usuario.email }}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}
