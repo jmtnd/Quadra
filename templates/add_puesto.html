@@ -1,0 +1,32 @@
+<!-- templates/add_puesto.html -->
+{% extends "base.html" %}
+
+{% block title %}Añadir Puesto{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <h2>Añadir Nuevo Puesto</h2>
+        <form method="POST" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <div class="mb-3">
+                {{ form.nombre.label(class="form-label") }}
+                {{ form.nombre(class="form-control") }}
+            </div>
+            <div class="mb-3">
+                {{ form.ubicacion.label(class="form-label") }}
+                {{ form.ubicacion(class="form-control") }}
+            </div>
+            <div class="mb-3">
+                {{ form.reseña.label(class="form-label") }}
+                {{ form.reseña(class="form-control", rows=4) }}
+            </div>
+            <div class="mb-3">
+                <label for="foto" class="form-label">Foto del puesto</label>
+                <input type="file" class="form-control" id="foto" name="foto">
+            </div>
+            {{ form.submit(class="btn btn-primary") }}
+        </form>
+    </div>
+</div>
+{% endblock %}

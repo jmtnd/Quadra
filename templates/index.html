@@ -1,0 +1,18 @@
+# index.html
+{% extends "base.html" %}
+{% block content %}
+    <h1 class="mb-4">Puestos de Comida</h1>
+    <div class="row">
+        {% for puesto in puestos %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ puesto.nombre }}</h5>
+                        <p class="card-text">{{ puesto.reseña|truncate(100) }}</p>
+                        <a href="{{ url_for('main.detalle_puesto', puesto_id=puesto.id) }}" class="btn btn-primary">Ver Detalles</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
