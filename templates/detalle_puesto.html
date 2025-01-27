@@ -6,10 +6,10 @@
 {% block content %}
 <div class="row">
     <div class="col-md-8">
-        <p class="text-small">Publicado por: {{ puesto.usuario.nombre }}</p>
+        <p class="text-small">Publicado por: {{ puesto.creador.nombre }}</p>
         <h2>{{ puesto.nombre }}</h2>
         <p class="text-muted">{{ puesto.ubicacion }}</p>
-        <img src="{{ puesto.foto_url }}" class="img-fluid mb-3" alt="{{ puesto.nombre }}">
+        <img src="{{ url_for('static', filename='uploads/' + puesto.foto_url) }}" class="img-fluid mb-3" alt="{{ puesto.nombre }}">
         <p>{{ puesto.reseña }}</p>
         
         <h4>Calificaciones</h4>
